@@ -12,20 +12,7 @@ export const getConnectedAddressForUser = async (fid: number) => {
 
         console.log('API Response:', JSON.stringify(json, null, 2));
 
-         // Check if messages array exists and has at least one item
-         if (!json.messages || !json.messages.length) {
-            console.error('No verification messages found:', json);
-            return null;
-        }
-
-         // Check the data structure more carefully
-         const message = json.messages[0];
-         if (!message.data || !message.data.verificationAddAddressBody) {
-             console.error('Unexpected message structure:', message);
-             return null;
-         }
-
-        const address = json.messages[0].data.verificationAddAddressBody.address
+        const address = json.user.custody_address
         return address
         
     } catch (error) {

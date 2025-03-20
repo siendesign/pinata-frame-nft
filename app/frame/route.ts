@@ -27,8 +27,12 @@ export async function POST(req: NextRequest, res: NextResponse) {
   const body = await req.json();
 
   console.log("body:", body);
+
   const fid = body.untrustedData.fid;
   const address = await getConnectedAddressForUser(fid);
+
+  console.log("address",address);
+
   const balance = await balanceOf(address);
   console.log(balance);
   if (typeof balance === "number" && balance !== null && balance < 1) {
