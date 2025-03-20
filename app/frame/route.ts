@@ -3,10 +3,15 @@ import { getConnectedAddressForUser } from "@/utils/fc";
 import { mintNft, balanceOf } from "@/utils/mint";
 
 import { PinataFDK } from "pinata-fdk";
+// const fdk = new PinataFDK({
+//   pinata_jwt: process.env.PINATA_JWT as string,
+//   pinata_gateway: process.env.GATEWAY_URL as string,
+// });
+
 const fdk = new PinataFDK({
-  pinata_jwt: process.env.PINATA_JWT as string,
-  pinata_gateway: process.env.GATEWAY_URL as string,
-});
+    pinata_jwt: process.env.PINATA_JWT!,
+    pinata_gateway: process.env.PINATA_GATEWAY!
+  });
 
 export async function GET(req: NextRequest, res: NextResponse) {
   try {
@@ -37,13 +42,14 @@ export async function POST(req: NextRequest, res: NextResponse) {
   console.log(balance);
   if (typeof balance === "number" && balance !== null && balance < 1) {
     try {
+    //   const mint = await mintNft("0x620E56fe54a8E13153E4Be7Bfa590b17bb48DfA8");
       const mint = await mintNft(address);
       console.log(mint);
       const frameMetadata = await fdk.getFrameMetadata({
         post_url: `${process.env.BASE_URL}/redirect`,
         buttons: [{ label: "Learn How to Make This", action: "post_redirect" }],
         aspect_ratio: "1:1",
-        cid: "bafybeifcowkukkzkxe2hxz7jenj4yp6vlwp5mjy6ay4p4ri44mcvh7mbym",
+        cid: "QmSr4zReFsPHSyB9Jn6Q2UcaQHRqd4wXeznTMsdYNgmHBc",
       });
       return new NextResponse(frameMetadata);
     } catch (error) {
@@ -55,7 +61,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
       post_url: `${process.env.BASE_URL}/redirect`,
       buttons: [{ label: "Learn How to Make This", action: "post_redirect" }],
       aspect_ratio: "1:1",
-      cid: "bafybeifcowkukkzkxe2hxz7jenj4yp6vlwp5mjy6ay4p4ri44mcvh7mbym",
+      cid: "QmSr4zReFsPHSyB9Jn6Q2UcaQHRqd4wXeznTMsdYNgmHBc",
     });
     return new NextResponse(frameMetadata);
   }
