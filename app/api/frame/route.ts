@@ -13,7 +13,7 @@ const fdk = new PinataFDK({
     pinata_gateway: process.env.PINATA_GATEWAY!
   });
 
-export async function GET(req: NextRequest, res: NextResponse) {
+export async function GET(req: NextRequest) {
   try {
     const frameMetadata = await fdk.getFrameMetadata({
       post_url: `${process.env.BASE_URL}/frame`,
@@ -28,7 +28,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
   }
 }
 
-export async function POST(req: NextRequest, res: NextResponse) {
+export async function POST(req: NextRequest) {
   const body = await req.json();
 
   console.log("body:", body);
