@@ -4,7 +4,7 @@ import { baseSepolia } from "viem/chains";
 import contractAbi from "./contract.json";
 const contractAddress = process.env.CONTRACT_ADDRESS as `0x`;
 
-const account = privateKeyToAccount((process.env.PRIVATE_KEY as `0x${string}`) || "");
+const account = privateKeyToAccount((process.env.PRIVATE_KEY as `0x`) || "");
 
 export const publicClient = createPublicClient({
   chain: baseSepolia,

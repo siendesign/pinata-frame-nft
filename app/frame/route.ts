@@ -14,7 +14,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
       post_url: `${process.env.BASE_URL}/frame`,
       buttons: [{ label: "Mint NFT", action: "post" }],
       aspect_ratio: "1:1",
-      cid: "bafybeifcowkukkzkxe2hxz7jenj4yp6vlwp5mjy6ay4p4ri44mcvh7mbym",
+      cid: "QmSr4zReFsPHSyB9Jn6Q2UcaQHRqd4wXeznTMsdYNgmHBc",
     });
     return new NextResponse(frameMetadata);
   } catch (error) {
@@ -25,6 +25,8 @@ export async function GET(req: NextRequest, res: NextResponse) {
 
 export async function POST(req: NextRequest, res: NextResponse) {
   const body = await req.json();
+
+  console.log("body:", body);
   const fid = body.untrustedData.fid;
   const address = await getConnectedAddressForUser(fid);
   const balance = await balanceOf(address);
